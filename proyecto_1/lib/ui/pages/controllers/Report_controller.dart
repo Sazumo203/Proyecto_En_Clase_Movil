@@ -1,45 +1,39 @@
-//import 'package:get/get.dart';
-//import 'package:loggy/loggy.dart';
-//
-//import '../../domain/models/user.dart';
-//import '../../domain/use_case/user_usecase.dart';
-//
-//class ReportController extends GetxController {
-//  final RxList<User> _users = <User>[].obs;
-//  final UserUseCase userUseCase = Get.find();
-//
-//  List<User> get users => _users;
-//
-//  @override
-//  void onInit() {
-//    getUers();
-//    super.onInit();
-//  }
-//
-//  getUers() async {
-//    logInfo("Getting users");
-//    _users.value = await userUseCase.getUsers();
-//  }
-//
-//  addUser(User user) async {
-//    logInfo("Add user");
-//    await userUseCase.addUser(user);
-//    getUers();
-//  }
-//
-//  updateUser(User user) async {
-//    logInfo("Update user");
-//    await userUseCase.updateUser(user);
-//    getUers();
-//  }
-//
-//  void deleteUser(int id) async {
-//    await userUseCase.deleteUser(id);
-//    getUers();
-//  }
-//
-//  void simulateProcess() async {
-//    await userUseCase.simulateProcess();
-//  }
-//}
-//
+import 'package:get/get.dart';
+import 'package:proyecto_1/domain/models/Reportes.dart';
+
+
+class ReportController extends GetxController {
+  final RxList<Reporte> _reports = <Reporte>[].obs;
+  //final UserUseCase userUseCase = Get.find();
+
+  List<Reporte> get reports => _reports;
+
+  @override
+  void onInit() {
+    getReports();
+    super.onInit();
+  }
+
+  getReports() async {
+    //_reports.value = await userUseCase.getUsers();
+  }
+
+  addReport(Reporte rep) async {
+    //await userUseCase.addReport(rep);
+    getReports();
+  }
+
+  updateReport(Reporte rep) async {
+    //await userUseCase.updateReport(rep);
+    getReports();
+  }
+
+  void deleteUser(int id) async {
+    //await userUseCase.deleteReport(id);
+    getReports();
+  }
+
+  //void simulateProcess() async {
+  //  await userUseCase.simulateProcess();
+  //}
+}

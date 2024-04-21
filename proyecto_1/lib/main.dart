@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(LoginController());
-    //Get.put(ReportController());
+    Get.put(ReportController());
     return GetMaterialApp(
       title: 'Administrador de reportes',
         debugShowCheckedModeBanner: false,
