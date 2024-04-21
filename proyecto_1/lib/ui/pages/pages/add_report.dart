@@ -3,18 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
 
-class NewUserPage extends StatefulWidget {
-  const NewUserPage({Key? key}) : super(key: key);
+class NewReportPage extends StatefulWidget {
+  const NewReportPage({Key? key}) : super(key: key);
 
   @override
   _NewUserPageState createState() => _NewUserPageState();
 }
 
-class _NewUserPageState extends State<NewUserPage> {
+class _NewUserPageState extends State<NewReportPage> {
   final controllerId = TextEditingController();
   final controllerIdCliente = TextEditingController();
-  final controllerCreatorName = TextEditingController();
-  final controllerCreatorId = TextEditingController();
   final controllerTitle = TextEditingController();
   final controllerBody = TextEditingController();
   final controllerGrade = TextEditingController();
@@ -35,26 +33,34 @@ class _NewUserPageState extends State<NewUserPage> {
               height: 20,
             ),
             TextField(
-                // controller: controllerFirstName,
+                controller: controllerId,
                 decoration: const InputDecoration(
-              labelText: 'Nombre Cliente: ',
-            )),
+                  labelText: 'Id Reporte: ',
+                )),
             const SizedBox(
               height: 20,
             ),
             TextField(
-                // controller: controllerLastName,
+                controller: controllerIdCliente,
                 decoration: const InputDecoration(
-              labelText: 'Last Name',
-            )),
+                  labelText: 'Id Cliente: ',
+                )),
             const SizedBox(
               height: 20,
             ),
             TextField(
-                // controller: controllerEmail,
+                controller: controllerTitle,
+                decoration: const InputDecoration(
+                  labelText: 'Title: ',
+                )),
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
+                controller: controllerBody,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                  labelText: 'Email',
+                  labelText: 'Body: ',
                 )),
             const SizedBox(
               height: 20,
@@ -68,11 +74,16 @@ class _NewUserPageState extends State<NewUserPage> {
                       flex: 2,
                       child: ElevatedButton(
                           onPressed: () async {
-                            //await reportController.addReport(Reporte(
-                            //email: controllerEmail.text,
-                            //firstName: controllerFirstName.text,
-                            //lastName: controllerLastName.text));
-                            // Get.back();
+                            await reportController.addReport(Reporte(
+                                id: int.parse(controllerId.text),
+                                idcliente: int.parse(controllerIdCliente.text),
+                                creatorName: "Creator",
+                                creactorId: 5,
+                                title: controllerTitle.text,
+                                body: controllerBody.text,
+                                grade: 0,
+                                itsgraded: false));
+                            Get.back();
                           },
                           child: const Text("Save")))
                 ],

@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
 import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
+import 'package:proyecto_1/ui/pages/pages/add_report.dart';
 import 'package:proyecto_1/ui/pages/pages/login.dart';
+import 'package:proyecto_1/ui/pages/pages/view_report.dart';
 
 class Reportlist extends StatefulWidget {
   const Reportlist({super.key});
@@ -32,7 +34,10 @@ class _Reportlist extends State<Reportlist> {
       body: Center(child: _getXlistView()),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          //
+          Get.to(
+            () => const NewReportPage(),
+            //arguments: [user, user.id]
+          );
         },
         child: const Icon(Icons.add),
       ),
@@ -45,30 +50,13 @@ class _Reportlist extends State<Reportlist> {
         itemCount: reportController.reports.length,
         itemBuilder: (context, index) {
           Reporte reporte = reportController.reports[index];
-          return Dismissible(
-            key: UniqueKey(),
-            background: Container(
-                color: Colors.red,
-                alignment: Alignment.centerLeft,
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "Deleting",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                )),
-            onDismissed: (direction) {
-              //userController.deleteUser(user.id!);
-            },
-            child: Card(
-              child: ListTile(
-                title: Text(reporte.gtitle),
-                subtitle: Text(reporte.gcreatorName),
-                onTap: () {
-                  //Get.to(() => const EditUserPage(),
-                  //arguments: [user, user.id]);
-                },
-              ),
+          return Card(
+            child: ListTile(
+              title: Text(reporte.gtitle),
+              subtitle: Text(reporte.gcreatorName),
+              onTap: () {
+                Get.to(ReporteView(reporte: reporte));
+              },
             ),
           );
         },
