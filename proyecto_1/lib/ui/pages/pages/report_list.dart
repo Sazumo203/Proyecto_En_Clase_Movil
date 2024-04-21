@@ -5,7 +5,6 @@ import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
 import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
 import 'package:proyecto_1/ui/pages/pages/login.dart';
 
-
 class Reportlist extends StatefulWidget {
   const Reportlist({super.key});
 
@@ -24,10 +23,10 @@ class _Reportlist extends State<Reportlist> {
         IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
-               loginController.logout();
-               Get.offAll(const LoginScreen(
-                            key: Key('LoginScreen'),
-                          ));
+              loginController.logout();
+              Get.offAll(const LoginScreen(
+                key: Key('LoginScreen'),
+              ));
             }),
       ]),
       body: Center(child: _getXlistView()),
@@ -45,7 +44,7 @@ class _Reportlist extends State<Reportlist> {
       () => ListView.builder(
         itemCount: reportController.reports.length,
         itemBuilder: (context, index) {
-          Reporte reportes = reportController.reports[index];
+          Reporte reporte = reportController.reports[index];
           return Dismissible(
             key: UniqueKey(),
             background: Container(
@@ -63,11 +62,11 @@ class _Reportlist extends State<Reportlist> {
             },
             child: Card(
               child: ListTile(
-                title: Text(user.name),
-                subtitle: Text(user.email),
+                title: Text(reporte.gtitle),
+                subtitle: Text(reporte.gcreatorName),
                 onTap: () {
                   //Get.to(() => const EditUserPage(),
-                      arguments: [user, user.id]);
+                  //arguments: [user, user.id]);
                 },
               ),
             ),
