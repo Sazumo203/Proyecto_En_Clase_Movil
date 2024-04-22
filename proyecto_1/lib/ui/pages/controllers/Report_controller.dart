@@ -54,8 +54,10 @@ class ReportController extends GetxController {
     getReports();
   }
 
-  updateReport(Reporte rep) async {
-    //await userUseCase.updateReport(rep);
+  updateReport(Reporte rep,int nota) async {
+    Reporte reporte =_reports.firstWhere((repo) => repo.id == rep.id);
+    reporte.grade = nota;
+    reporte.itsgraded = true;
     getReports();
   }
 

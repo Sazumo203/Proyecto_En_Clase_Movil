@@ -185,7 +185,7 @@ class ReporteViewUc extends StatelessWidget {
             ),
             OutlinedButton(
                 onPressed: () {
-                  reportController.updateReport(reporte);
+                  reportController.updateReport(reporte,cal);
                   Get.back();
                 },
                 child: const Text("Enviar")),
