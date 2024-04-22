@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Clientes.dart';
 import 'package:proyecto_1/ui/pages/controllers/Client_controller.dart';
 
-
 class ClientListUc extends StatefulWidget {
   const ClientListUc({super.key});
 
@@ -17,8 +16,7 @@ class _ClientListUc extends State<ClientListUc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Clientes"), 
-      actions: const []),
+      appBar: AppBar(title: const Text("Clientes"), actions: const []),
       body: Center(child: _getXlistView()),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

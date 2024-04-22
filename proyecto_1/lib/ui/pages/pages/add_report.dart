@@ -2,6 +2,7 @@ import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
+import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
 import 'package:proyecto_1/ui/pages/widgets/hora.dart';
 import 'package:proyecto_1/ui/pages/widgets/inputint.dart';
 
@@ -14,6 +15,7 @@ class NewReportPage extends StatefulWidget {
 
 class _NewUserPageState extends State<NewReportPage> {
   final controllerId = TextEditingController();
+  LoginController loginController = Get.find();
   final controllerIdCliente = TextEditingController();
   final controllerTitle = TextEditingController();
   final controllerBody = TextEditingController();
@@ -109,8 +111,8 @@ class _NewUserPageState extends State<NewReportPage> {
                             await reportController.addReport(Reporte(
                                 id: int.parse(controllerId.text),
                                 idcliente: int.parse(controllerIdCliente.text),
-                                creatorName: "Creator",
-                                creactorId: 5,
+                                creatorName: loginController.nombreusuario,
+                                creactorId: loginController.idusuario,
                                 title: controllerTitle.text,
                                 body: controllerBody.text,
                                 grade: 0,

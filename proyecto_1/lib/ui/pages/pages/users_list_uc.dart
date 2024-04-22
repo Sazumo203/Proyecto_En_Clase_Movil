@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Usuarios.dart';
 import 'package:proyecto_1/ui/pages/controllers/User_controller.dart';
-
+import 'package:proyecto_1/ui/pages/pages/add_user.dart';
 
 class UsersListUc extends StatefulWidget {
   const UsersListUc({super.key});
@@ -17,15 +17,13 @@ class _UsersListUc extends State<UsersListUc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Usuarios"), 
-      actions: const []),
+      appBar: AppBar(title: const Text("Usuarios"), actions: const []),
       body: Center(child: _getXlistView()),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          //Get.to(
-          //  () => const NewReportPage(),
-          //  //arguments: [user, user.id]
-          //);
+          Get.to(
+            () => const NewUserPage(),
+          );
         },
         child: const Icon(Icons.add),
       ),
