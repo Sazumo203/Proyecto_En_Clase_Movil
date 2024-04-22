@@ -5,7 +5,7 @@ import 'package:proyecto_1/domain/models/Clientes.dart';
 
 class ClientController extends GetxController {
   final RxList<Cliente> _clients = <Cliente>[].obs;
-  //final UserUseCase userUseCase = Get.find();
+  //final UserUseCase userUseCase = Get.find()  sda;
 
   List<Cliente> get clients => _clients;
 
