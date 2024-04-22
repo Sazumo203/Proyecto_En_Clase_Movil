@@ -21,23 +21,24 @@ class _Reportlist extends State<Reportlist> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Bienvenido"), actions: [
-        IconButton(
+      appBar: AppBar(
+        title: Obx(
+          () => Text("Bienvenido, ${loginController.nombreusuario}"),
+        ),
+        actions: [
+          IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
               loginController.logout();
-              Get.offAll(const LoginScreen(
-                key: Key('LoginScreen'),
-              ));
-            }),
-      ]),
-      body: Center(child: _getXlistView()),
+              Get.offAll(const LoginScreen(key: Key('LoginScreen')));
+            },
+          ),
+        ],
+      ),
+      body: Center(child: _getXlistView()), // Asumiendo que esta función existe
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Get.to(
-            () => const NewReportPage(),
-            //arguments: [user, user.id]
-          );
+        onPressed: () {
+          Get.to(() => const NewReportPage());
         },
         child: const Icon(Icons.add),
       ),

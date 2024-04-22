@@ -19,10 +19,7 @@ class UserController extends GetxController {
   initUsers() async {
     _users.value = [
       Usuario(
-          id: 111,
-          name: "Samuel Zuleta",
-          correo: "s@a.com",
-          password: "54321"),
+          id: 111, name: "Samuel Zuleta", correo: "s@a.com", password: "54321"),
       Usuario(
           id: 222,
           name: "Rafael Martinez",
