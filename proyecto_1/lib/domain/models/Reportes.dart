@@ -26,6 +26,7 @@ class Reporte {
 
   String get gtitle => title;
   String get gcreatorName => creatorName;
+  int get ggrade => grade;
 
   factory Reporte.fromJson(Map<String, dynamic> json) => Reporte(
       id: json["id"],

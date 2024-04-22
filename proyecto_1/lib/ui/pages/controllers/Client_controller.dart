@@ -31,7 +31,7 @@ class ClientController extends GetxController {
     //_reports.value = await userUseCase.getUsers();
   }
 
-  addUser(Cliente clt) async {
+  addcliente(Cliente clt) async {
     //await userUseCase.addReport(rep);
     _clients.value = [..._clients.value, clt];
     getClients();

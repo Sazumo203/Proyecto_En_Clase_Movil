@@ -10,8 +10,10 @@ class ReporteViewUc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ReportController reportController = Get.find();
+    reportController.upCal(0);
+  
 
-    int cal = 0;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detalle del Reporte'),
@@ -148,8 +150,9 @@ class ReporteViewUc extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.remove),
                   onPressed: () {
-                    if (cal < 5) {
-                      cal++;
+                    if (reporte.grade > 1) {
+                      reporte.grade--;
+                      reportController.upCal(reporte.grade);
                     }
                   },
                   iconSize: 48,
@@ -161,15 +164,16 @@ class ReporteViewUc extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                Text(cal.toString(), style: const TextStyle(fontSize: 20)),
+                Obx(() => Text('${reportController.calificacion}', style: const TextStyle(fontSize: 20))),
                 const SizedBox(
                   width: 20,
                 ),
                 IconButton(
                   icon: const Icon(Icons.add),
                   onPressed: () {
-                    if (cal > 1) {
-                      cal--;
+                    if (reporte.grade < 5) {
+                      reporte.grade++;
+                      reportController.upCal(reporte.grade);
                     }
                   },
                   iconSize: 48,
@@ -185,7 +189,7 @@ class ReporteViewUc extends StatelessWidget {
             ),
             OutlinedButton(
                 onPressed: () {
-                  reportController.updateReport(reporte,cal);
+                  reportController.updateReport(reporte);
                   Get.back();
                 },
                 child: const Text("Enviar")),

@@ -7,15 +7,21 @@ import 'package:proyecto_1/domain/models/Reportes.dart';
 class ReportController extends GetxController {
   final RxList<Reporte> _reports = <Reporte>[].obs;
   //final UserUseCase userUseCase = Get.find();
-
+  RxInt _calificacion = 0.obs;
   List<Reporte> get reports => _reports;
-
+  int get calificacion => _calificacion.value; 
   @override
   void onInit() {
     initReports();
     //GET
     super.onInit();
   }
+
+  void upCal(int cal){
+    _calificacion.value= cal;
+  }
+
+
 
   initReports() async {
     _reports.value = [
@@ -44,6 +50,7 @@ class ReportController extends GetxController {
     ];
   }
 
+
   getReports() async {
     //_reports.value = await userUseCase.getUsers();
   }
@@ -54,9 +61,9 @@ class ReportController extends GetxController {
     getReports();
   }
 
-  updateReport(Reporte rep,int nota) async {
+  updateReport(Reporte rep) async {
     Reporte reporte =_reports.firstWhere((repo) => repo.id == rep.id);
-    reporte.grade = nota;
+    reporte.grade = rep.grade;
     reporte.itsgraded = true;
     getReports();
   }
@@ -65,7 +72,10 @@ class ReportController extends GetxController {
     //await userUseCase.deleteReport(id);
     getReports();
   }
-
+  void addgrade() async {
+    //await userUseCase.deleteReport(id);
+    getReports();
+  }
   //void simulateProcess() async {
   //  await userUseCase.simulateProcess();
   //}
