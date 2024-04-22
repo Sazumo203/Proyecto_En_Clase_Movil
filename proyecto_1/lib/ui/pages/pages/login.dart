@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
+import 'package:proyecto_1/ui/pages/pages/main_uc.dart';
 import 'package:proyecto_1/ui/pages/pages/report_list.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -76,9 +77,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (form.validate()) {
                         if (await loginController.login(
                             _emailController.text, _passwordController.text)) {
-                          Get.offAll(const Reportlist(
-                            key: Key('Reportlist'),
-                          ));
+                          if (loginController.rol == "uc") {
+                            Get.offAll(const MainUcScreen(
+                              key: Key('MainUcScreen'),
+                            ));
+                          } else if (loginController.rol == "us") {
+                            Get.offAll(const Reportlist(
+                              key: Key('Reportlist'),
+                            ));
+                          }
+
                           const snackBar = SnackBar(
                             content: Text('User or password ok'),
                           );

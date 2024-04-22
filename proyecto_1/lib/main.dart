@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_1/ui/pages/controllers/Client_controller.dart';
 import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
+import 'package:proyecto_1/ui/pages/controllers/User_controller.dart';
 import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
 import 'package:proyecto_1/ui/pages/pages/login.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(LoginController());
     Get.put(ReportController());
+    Get.put(UserController());
+    Get.put(ClientController());
     return GetMaterialApp(
       title: 'Administrador de reportes',
         debugShowCheckedModeBanner: false,
