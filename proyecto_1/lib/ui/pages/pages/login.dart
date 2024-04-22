@@ -6,7 +6,6 @@ import 'package:proyecto_1/ui/pages/pages/report_list.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -75,7 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       final form = _formKey.currentState;
                       form!.save();
                       if (form.validate()) {
-                        if (await loginController.login(_emailController.text,_passwordController.text)) {
+                        if (await loginController.login(
+                            _emailController.text, _passwordController.text)) {
                           Get.offAll(const Reportlist(
                             key: Key('Reportlist'),
                           ));
@@ -100,7 +100,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-
               ],
             ),
           ),

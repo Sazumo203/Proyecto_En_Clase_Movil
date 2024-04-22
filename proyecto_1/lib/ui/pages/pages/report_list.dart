@@ -53,7 +53,7 @@ class _Reportlist extends State<Reportlist> {
           return Card(
             child: ListTile(
               title: Text(reporte.gtitle),
-              subtitle: Text(reporte.gcreatorName),
+              subtitle: Text(reporte.body),
               onTap: () {
                 Get.to(ReporteView(reporte: reporte));
               },

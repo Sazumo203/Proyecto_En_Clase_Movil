@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
 
@@ -23,19 +24,23 @@ class ReportController extends GetxController {
           idcliente: 1,
           creatorName: "Creator 1",
           creactorId: 5,
-          title: "Reporte 1",
-          body: "Juanchito tira la silla",
+          title: "Reporte de la mañana",
+          body: "Juanchito tira la silla y la parte",
           grade: 4,
-          itsgraded: true),
+          itsgraded: true,
+          horainicio: const TimeOfDay(hour: 8, minute: 30),
+          duracion: 25),
       Reporte(
           id: 2,
           idcliente: 2,
           creatorName: "Creator 1",
           creactorId: 5,
-          title: "Reporte 2",
-          body: "Camilo tira la silla",
+          title: "Reporte de la tarde",
+          body: "Camilo se da trompá con Juanchito por estúpido",
           grade: 0,
-          itsgraded: false)
+          itsgraded: false,
+          horainicio: const TimeOfDay(hour: 17, minute: 25),
+          duracion: 45)
     ];
   }
 

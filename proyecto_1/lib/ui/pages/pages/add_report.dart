@@ -2,6 +2,8 @@ import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
+import 'package:proyecto_1/ui/pages/widgets/hora.dart';
+import 'package:proyecto_1/ui/pages/widgets/inputint.dart';
 
 class NewReportPage extends StatefulWidget {
   const NewReportPage({Key? key}) : super(key: key);
@@ -16,6 +18,15 @@ class _NewUserPageState extends State<NewReportPage> {
   final controllerTitle = TextEditingController();
   final controllerBody = TextEditingController();
   final controllerGrade = TextEditingController();
+  final timeController = TextEditingController();
+  TimeOfDay _selectedTime = const TimeOfDay(
+      hour: 4, minute: 20); // Controlador para guardar la hora seleccionada
+
+  final controllerDuracion =
+      TextEditingController(); // Controlador del campo de texto
+
+  //final TextEditingController integerController =
+  //  TextEditingController(); // Controlador para el número entero
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +62,7 @@ class _NewUserPageState extends State<NewReportPage> {
             TextField(
                 controller: controllerTitle,
                 decoration: const InputDecoration(
-                  labelText: 'Title: ',
+                  labelText: 'Título del reporte: ',
                 )),
             const SizedBox(
               height: 20,
@@ -60,8 +71,29 @@ class _NewUserPageState extends State<NewReportPage> {
                 controller: controllerBody,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                  labelText: 'Body: ',
+                  labelText: 'Descripción del reporte: ',
                 )),
+            const SizedBox(
+              height: 20,
+            ),
+            HoraSelector(
+              label: "Hora inicio de atención",
+              onTimeSelected: (selectedTime) {
+                setState(() {
+                  _selectedTime = selectedTime; // Guardar la hora seleccionada
+                });
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            NumeroEnteroInput(
+              label: "Ingrese la duración (En minutos): ",
+              controller: controllerDuracion, // Pasar el controlador
+              onTextChanged: (text) {
+                // Puedes hacer algo con el texto cambiado
+              },
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -82,10 +114,15 @@ class _NewUserPageState extends State<NewReportPage> {
                                 title: controllerTitle.text,
                                 body: controllerBody.text,
                                 grade: 0,
-                                itsgraded: false));
+                                itsgraded: false,
+                                horainicio: _selectedTime,
+                                // horainicio: timeController.text,
+                                duracion: int.parse(controllerDuracion.text)
+                                //duracion: int.parse(integerController.text)
+                                ));
                             Get.back();
                           },
-                          child: const Text("Save")))
+                          child: const Text("Guardar Reporte")))
                 ],
               ),
             )

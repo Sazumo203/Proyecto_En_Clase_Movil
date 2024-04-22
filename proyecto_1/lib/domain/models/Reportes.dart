@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Reporte {
   Reporte(
       {this.id,
@@ -7,7 +9,9 @@ class Reporte {
       required this.body,
       required this.grade,
       required this.idcliente,
-      required this.itsgraded});
+      required this.itsgraded,
+      required this.horainicio,
+      required this.duracion});
 
   int? id;
   int? idcliente;
@@ -17,6 +21,8 @@ class Reporte {
   String body;
   int grade;
   bool itsgraded;
+  TimeOfDay horainicio;
+  int duracion;
 
   String get gtitle => title;
   String get gcreatorName => creatorName;
@@ -29,7 +35,9 @@ class Reporte {
       title: json["title"] ?? "NA",
       body: json["body"] ?? "NA",
       grade: json["grade"] ?? "0",
-      itsgraded: json["itsgraded"] ?? false);
+      itsgraded: json["itsgraded"] ?? false,
+      horainicio: json["horainicio"] ?? "04:20:00",
+      duracion: json["duracion"] ?? 30);
 
   Map<String, dynamic> toJson() => {
         "id": id ?? 0,
@@ -39,6 +47,8 @@ class Reporte {
         "title": title,
         "body": body,
         "grade": grade,
-        "itsgraded": itsgraded
+        "itsgraded": itsgraded,
+        "horainicio": horainicio,
+        "duracion": duracion
       };
 }
