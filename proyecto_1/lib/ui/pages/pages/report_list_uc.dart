@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
+import 'package:proyecto_1/ui/pages/pages/view_report.dart';
+import 'package:proyecto_1/ui/pages/pages/view_report_uc.dart';
 
 
 class ReportListUc extends StatefulWidget {
@@ -32,9 +34,14 @@ class _ReportListUc extends State<ReportListUc> {
           return Card(
             child: ListTile(
               title: Text(reporte.gtitle),
-              subtitle: Text(reporte.gcreatorName),
+              subtitle: Text(reporte.body),
               onTap: () {
-                //Get.to();
+                if(reporte.itsgraded){
+                  Get.to(ReporteView(reporte: reporte));
+                }else{
+                  Get.to(ReporteViewUc(reporte: reporte));
+                }
+                
               },
             ),
           );
