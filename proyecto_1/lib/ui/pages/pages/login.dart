@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
-import 'package:proyecto_1/ui/pages/pages/main_uc.dart';
 import 'package:proyecto_1/ui/pages/pages/report_list.dart';
+import 'package:proyecto_1/ui/pages/pages/report_list_uc.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -78,8 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (await loginController.login(
                             _emailController.text, _passwordController.text)) {
                           if (loginController.rol == "uc") {
-                            Get.offAll(const MainUcScreen(
-                              key: Key('MainUcScreen'),
+                            Get.offAll(const ReportListUc(
+                              key: Key('ReportListUc'),
                             ));
                           } else if (loginController.rol == "us") {
                             Get.offAll(const Reportlist(

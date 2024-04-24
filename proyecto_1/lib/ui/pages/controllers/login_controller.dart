@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Usuarios.dart';
-import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
 import 'package:proyecto_1/ui/pages/controllers/User_controller.dart';
 
 class LoginController extends GetxController {

@@ -11,8 +11,6 @@ class ReporteViewUc extends StatelessWidget {
   Widget build(BuildContext context) {
     ReportController reportController = Get.find();
     reportController.upCal(0);
-  
-
 
     return Scaffold(
       appBar: AppBar(
@@ -22,6 +20,7 @@ class ReporteViewUc extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
+          shrinkWrap: true,
           // Usamos ListView para permitir desplazamiento si hay mucho contenido
           children: [
             Center(
@@ -164,7 +163,8 @@ class ReporteViewUc extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                Obx(() => Text('${reportController.calificacion}', style: const TextStyle(fontSize: 20))),
+                Obx(() => Text('${reportController.calificacion}',
+                    style: const TextStyle(fontSize: 20))),
                 const SizedBox(
                   width: 20,
                 ),
@@ -184,15 +184,23 @@ class ReporteViewUc extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            OutlinedButton(
-                onPressed: () {
-                  reportController.updateReport(reporte);
-                  Get.back();
-                },
-                child: const Text("Enviar")),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Container(
+                width: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    reportController.updateReport(reporte);
+                    Get.back();
+                  },
+                  child: const Text("Enviar")
+              ),
+              Container(
+                width: 10,
+              ),
+            ]),
           ],
         ),
       ),

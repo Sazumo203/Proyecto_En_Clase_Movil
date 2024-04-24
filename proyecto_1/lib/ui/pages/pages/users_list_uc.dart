@@ -17,7 +17,7 @@ class _UsersListUc extends State<UsersListUc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Usuarios"), actions: const []),
+      appBar: AppBar(title: const Text("Trabajadores"), actions: const []),
       body: Center(child: _getXlistView()),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

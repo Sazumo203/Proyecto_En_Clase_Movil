@@ -22,7 +22,8 @@ class _MainUcScreenState extends State<MainUcScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: const Text("Bienvenido, Administrador"), actions: [
+      appBar: AppBar(title: const Text("Bienvenido, Administrador"), 
+      actions: [
         IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
