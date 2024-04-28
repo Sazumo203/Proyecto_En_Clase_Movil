@@ -4,7 +4,7 @@ import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
 
 class ReporteViewUc extends StatelessWidget {
-  const ReporteViewUc({required this.reporte});
+  const ReporteViewUc({super.key, required this.reporte});
   final Reporte reporte;
 
   @override
@@ -184,23 +184,17 @@ class ReporteViewUc extends StatelessWidget {
                 )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-              Container(
-                width: 10,
-              ),
-              ElevatedButton(
+            SizedBox(
+              height: 34,
+              width: 34,
+              child:  ElevatedButton(
                   onPressed: () {
                     reportController.updateReport(reporte);
                     Get.back();
                   },
                   child: const Text("Enviar")
               ),
-              Container(
-                width: 10,
-              ),
-            ]),
+            )
           ],
         ),
       ),

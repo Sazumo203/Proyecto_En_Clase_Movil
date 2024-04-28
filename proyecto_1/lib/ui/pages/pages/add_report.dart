@@ -37,6 +37,7 @@ class _NewUserPageState extends State<NewReportPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nuevo Reporte'),
+        backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

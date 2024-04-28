@@ -25,6 +25,7 @@ class _Reportlist extends State<Reportlist> {
         title: Obx(
           () => Text("Bienvenido, ${loginController.nombreusuario}"),
         ),
+        backgroundColor: Colors.blueAccent,
         actions: [
           IconButton(
             icon: const Icon(Icons.exit_to_app),
