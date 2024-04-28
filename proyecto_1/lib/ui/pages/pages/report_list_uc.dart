@@ -24,19 +24,36 @@ class _ReportListUc extends State<ReportListUc> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Reportes"),
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: const Text("Reportes",style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.blueAccent,
           actions: [
-            IconButton(
-                icon: const Icon(Icons.work),
+            TextButton(
                 onPressed: () {
                   Get.to(const UsersListUc());
-                }),
-            IconButton(
-                icon: const Icon(Icons.group),
+                },
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.work, color: Colors.white),
+                    SizedBox(width: 5),
+                    Text('Usuarios',style: TextStyle(color: Colors.white)),
+                  ],
+                ),
+            ),
+            TextButton(
                 onPressed: () {
                   Get.to(const ClientListUc());
-                }),
+                },
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.group, color: Colors.white),
+                    SizedBox(width: 5),
+                    Text('Clientes',style: TextStyle(color: Colors.white)),
+                  ],
+                ),
+            ),
             IconButton(
                 icon: const Icon(Icons.exit_to_app),
                 onPressed: () {

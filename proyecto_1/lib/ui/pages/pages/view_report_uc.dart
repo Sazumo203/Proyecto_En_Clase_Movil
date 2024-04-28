@@ -14,7 +14,8 @@ class ReporteViewUc extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalle del Reporte'),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text('Detalle del Reporte',style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(

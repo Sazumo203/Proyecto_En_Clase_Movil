@@ -17,7 +17,7 @@ class _ClientListUc extends State<ClientListUc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Clientes"),backgroundColor: Colors.blueAccent, actions: const []),
+      appBar: AppBar(title: const Text("Clientes",style: TextStyle(color: Colors.white)),backgroundColor: Colors.blueAccent, iconTheme: const IconThemeData(color: Colors.white)),
       body: Center(child: _getXlistView()),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

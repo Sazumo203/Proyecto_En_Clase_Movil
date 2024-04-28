@@ -22,8 +22,9 @@ class _Reportlist extends State<Reportlist> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Obx(
-          () => Text("Bienvenido, ${loginController.nombreusuario}"),
+          () => Text("Bienvenido, ${loginController.nombreusuario}",style: const TextStyle(color: Colors.white)),
         ),
         backgroundColor: Colors.blueAccent,
         actions: [

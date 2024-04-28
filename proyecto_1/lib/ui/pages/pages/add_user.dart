@@ -25,7 +25,8 @@ class _NewUserPageState extends State<NewUserPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nuevo usuario de soporte'),
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text('Nuevo usuario de soporte',style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
