@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Clientes.dart';
-import 'package:proyecto_1/ui/pages/controllers/Client_controller.dart';
-import 'package:proyecto_1/ui/pages/pages/add_client.dart';
+import 'package:proyecto_1/ui/controllers/Client_controller.dart';
+import 'package:proyecto_1/ui/pages/add_client.dart';
+
 
 class ClientListUc extends StatefulWidget {
   const ClientListUc({super.key});

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_1/ui/pages/controllers/Client_controller.dart';
-import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
-import 'package:proyecto_1/ui/pages/controllers/User_controller.dart';
-import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
-import 'package:proyecto_1/ui/pages/pages/login.dart';
 import 'package:get/get.dart';
+import 'package:proyecto_1/data/datasources/remote/i_report_datasource.dart';
+import 'package:proyecto_1/data/datasources/remote/report_datasource.dart';
+import 'package:proyecto_1/data/repositories/report_repository.dart';
+import 'package:proyecto_1/domain/repositories/I_report_repository.dart';
+import 'package:proyecto_1/domain/use_case/report_usercase.dart';
+import 'package:proyecto_1/ui/controllers/Client_controller.dart';
+import 'package:proyecto_1/ui/controllers/Report_controller.dart';
+import 'package:proyecto_1/ui/controllers/User_controller.dart';
+import 'package:proyecto_1/ui/controllers/login_controller.dart';
+import 'package:proyecto_1/ui/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +21,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+     Get.put<IReportDataSource>(ReportDataSource());
+  Get.put<IReportRepository>(ReportRepository(Get.find()));
+  Get.put(ReportUserCase(Get.find()));
     Get.put(UserController());
     Get.put(LoginController());
     Get.put(ReportController());

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Usuarios.dart';
-import 'package:proyecto_1/ui/pages/controllers/User_controller.dart';
-import 'package:proyecto_1/ui/pages/pages/add_user.dart';
+import 'package:proyecto_1/ui/controllers/User_controller.dart';
+import 'package:proyecto_1/ui/pages/add_user.dart';
 
 class UsersListUc extends StatefulWidget {
   const UsersListUc({super.key});

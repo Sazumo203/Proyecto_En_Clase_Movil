@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
-import 'package:proyecto_1/ui/pages/pages/client_list_uc.dart';
-import 'package:proyecto_1/ui/pages/pages/login.dart';
-import 'package:proyecto_1/ui/pages/pages/report_list_uc.dart';
-import 'package:proyecto_1/ui/pages/pages/users_list_uc.dart';
+import 'package:proyecto_1/ui/controllers/login_controller.dart';
+import 'package:proyecto_1/ui/pages/client_list_uc.dart';
+import 'package:proyecto_1/ui/pages/login.dart';
+import 'package:proyecto_1/ui/pages/report_list_uc.dart';
+import 'package:proyecto_1/ui/pages/users_list_uc.dart';
+
 
 
 class MainUcScreen extends StatefulWidget {

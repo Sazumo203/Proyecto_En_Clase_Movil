@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
-import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
+import 'package:proyecto_1/ui/controllers/Report_controller.dart';
 
 class ReporteViewUc extends StatelessWidget {
   const ReporteViewUc({super.key, required this.reporte});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
-import 'package:proyecto_1/ui/pages/pages/report_list.dart';
-import 'package:proyecto_1/ui/pages/pages/report_list_uc.dart';
+import 'package:proyecto_1/ui/controllers/login_controller.dart';
+import 'package:proyecto_1/ui/pages/report_list.dart';
+import 'package:proyecto_1/ui/pages/report_list_uc.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -71,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           } else if (!value.contains('@')) {
                             return "Ingresa un correo valido";
                           }
+                          return null;
                         },
                       ),
                       const SizedBox(
@@ -134,12 +135,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const snackBar = SnackBar(
                                   content: Text('User or password ok'),
                                 );
+                                // ignore: use_build_context_synchronously
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               } else {
                                 const snackBar = SnackBar(
                                   content: Text('User or password nok'),
                                 );
+                                // ignore: use_build_context_synchronously
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               }

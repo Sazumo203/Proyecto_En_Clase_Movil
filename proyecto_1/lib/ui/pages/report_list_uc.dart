@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
-import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
-import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
-import 'package:proyecto_1/ui/pages/pages/client_list_uc.dart';
-import 'package:proyecto_1/ui/pages/pages/login.dart';
-import 'package:proyecto_1/ui/pages/pages/users_list_uc.dart';
-import 'package:proyecto_1/ui/pages/pages/view_report.dart';
-import 'package:proyecto_1/ui/pages/pages/view_report_uc.dart';
+import 'package:proyecto_1/ui/controllers/Report_controller.dart';
+import 'package:proyecto_1/ui/controllers/login_controller.dart';
+import 'package:proyecto_1/ui/pages/client_list_uc.dart';
+import 'package:proyecto_1/ui/pages/login.dart';
+import 'package:proyecto_1/ui/pages/users_list_uc.dart';
+import 'package:proyecto_1/ui/pages/view_report.dart';
+import 'package:proyecto_1/ui/pages/view_report_uc.dart';
+
 
 class ReportListUc extends StatefulWidget {
   const ReportListUc({super.key});

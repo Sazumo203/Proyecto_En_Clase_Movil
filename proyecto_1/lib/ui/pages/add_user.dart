@@ -1,10 +1,8 @@
-import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Usuarios.dart';
-import 'package:proyecto_1/ui/pages/controllers/Report_controller.dart';
-import 'package:proyecto_1/ui/pages/controllers/User_controller.dart';
-import 'package:proyecto_1/ui/pages/controllers/login_controller.dart';
+import 'package:proyecto_1/ui/controllers/User_controller.dart';
+
 
 class NewUserPage extends StatefulWidget {
   const NewUserPage({Key? key}) : super(key: key);
