@@ -59,23 +59,16 @@ class ReportController extends GetxController {
 
   addReport(Reporte rep) async {
     await reportUserCase.addReport(rep);
-    //_reports.value = [..._reports.value, rep];
     getReports();
   }
 
   updateReport(Reporte rep) async {
-    Reporte reporte =_reports.firstWhere((repo) => repo.id == rep.id);
-    reporte.grade = rep.grade;
-    reporte.itsgraded = true;
+    await reportUserCase.updateReport(rep);
     getReports();
   }
 
   void deleteReport(int id) async {
-    //await userUseCase.deleteReport(id);
-    getReports();
-  }
-  void addgrade() async {
-    //await userUseCase.deleteReport(id);
+    await reportUserCase.deleteReport(id);
     getReports();
   }
   //void simulateProcess() async {
