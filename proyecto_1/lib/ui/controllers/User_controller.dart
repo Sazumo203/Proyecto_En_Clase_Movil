@@ -2,7 +2,7 @@ import 'dart:html';
 
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Usuarios.dart';
-import 'package:proyecto_1/domain/use_case/usuario_usercase%20copy.dart';
+import 'package:proyecto_1/domain/use_case/usuario_usercase.dart';
 
 class UserController extends GetxController {
   final RxList<Usuario> _users = <Usuario>[].obs;
@@ -17,7 +17,6 @@ class UserController extends GetxController {
     //GET
     super.onInit();
   }
-
 
   getUsers() async {
     _users.value = await usuarioUserCase.getUsuarios();

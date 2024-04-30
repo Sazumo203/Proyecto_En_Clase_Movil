@@ -1,5 +1,3 @@
-
-
 import 'package:proyecto_1/data/datasources/remote/i_report_datasource.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:proyecto_1/domain/repositories/I_report_repository.dart';
@@ -9,7 +7,8 @@ class ReportRepository implements IReportRepository {
   ReportRepository(this._userDatatasource);
 
   @override
-  Future<List<Reporte>> getReports() async => await _userDatatasource.getReports();
+  Future<List<Reporte>> getReports() async =>
+      await _userDatatasource.getReports();
 
   @override
   Future<bool> addReport(Reporte rep) async =>

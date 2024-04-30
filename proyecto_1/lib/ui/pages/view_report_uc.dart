@@ -9,20 +9,23 @@ class ReporteViewUc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ReportController reportController = Get.find();
+    final reportController = Get.find<ReportController>();
     reportController.upCal(0);
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text('Detalle del Reporte',style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Detalle del Reporte',
+          style: TextStyle(color: Colors.white), // Título en blanco
+        ),
+        leading:
+            const Icon(Icons.assignment, color: Colors.white), // Icono blanco
         backgroundColor: Colors.blueAccent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
-          shrinkWrap: true,
-          // Usamos ListView para permitir desplazamiento si hay mucho contenido
+          shrinkWrap: true, // Para permitir desplazamiento si es necesario
           children: [
             Center(
               child: Text(
@@ -36,7 +39,6 @@ class ReporteViewUc extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Card(
-              // Usamos Card para dar estilo al contenedor
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -69,7 +71,6 @@ class ReporteViewUc extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    // Información del cliente
                     Row(
                       children: [
                         const Icon(Icons.account_circle,
@@ -82,7 +83,6 @@ class ReporteViewUc extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    // Sección de calificación
                     Row(
                       children: [
                         const Icon(
@@ -99,7 +99,6 @@ class ReporteViewUc extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    // Hora de inicio y duración
                     Row(
                       children: [
                         const Icon(Icons.access_time, color: Colors.blueAccent),
@@ -122,9 +121,8 @@ class ReporteViewUc extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    // Contenido del reporte
                     const Text(
-                      'Contenido del reporte:',
+                      'Contenido del Reporte:',
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -139,9 +137,7 @@ class ReporteViewUc extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
+            const SizedBox(height: 30),
             const Center(
                 child: Text("Calificación", style: TextStyle(fontSize: 30))),
             Row(
@@ -158,17 +154,11 @@ class ReporteViewUc extends StatelessWidget {
                   iconSize: 48,
                   color: Colors.blue,
                   splashRadius: 24,
-                  padding: const EdgeInsets.all(16),
-                  constraints: const BoxConstraints(),
                 ),
-                const SizedBox(
-                  width: 20,
-                ),
+                const SizedBox(width: 20),
                 Obx(() => Text('${reportController.calificacion}',
                     style: const TextStyle(fontSize: 20))),
-                const SizedBox(
-                  width: 20,
-                ),
+                const SizedBox(width: 20),
                 IconButton(
                   icon: const Icon(Icons.add),
                   onPressed: () {
@@ -180,22 +170,22 @@ class ReporteViewUc extends StatelessWidget {
                   iconSize: 48,
                   color: Colors.blue,
                   splashRadius: 24,
-                  padding: const EdgeInsets.all(16),
-                  constraints: const BoxConstraints(),
-                )
+                ),
               ],
             ),
-            SizedBox(
-              height: 34,
-              width: 34,
-              child:  ElevatedButton(
+            const SizedBox(height: 30),
+            Center(
+              child: SizedBox(
+                width: 200, // Control del ancho del botón
+                child: ElevatedButton(
                   onPressed: () {
                     reportController.updateReport(reporte);
                     Get.back();
                   },
-                  child: const Text("Enviar")
+                  child: const Text("Enviar"), // Botón centrado y reducido
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

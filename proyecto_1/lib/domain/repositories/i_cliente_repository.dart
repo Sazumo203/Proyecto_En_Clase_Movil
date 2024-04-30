@@ -1,6 +1,4 @@
-
-
-import 'package:proyecto_1/data/datasources/remote/i_Cliente_datasource.dart';
+import 'package:proyecto_1/data/datasources/remote/i_cliente_datasource.dart';
 import 'package:proyecto_1/domain/models/Clientes.dart';
 
 abstract class IClienteRepository {

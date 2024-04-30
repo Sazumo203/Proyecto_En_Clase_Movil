@@ -1,23 +1,22 @@
-
-
-import 'package:proyecto_1/data/datasources/remote/i_Cliente_datasource.dart';
+import 'package:proyecto_1/data/datasources/remote/i_cliente_datasource.dart';
 import 'package:proyecto_1/domain/models/Clientes.dart';
-import 'package:proyecto_1/domain/repositories/I_Cliente_repository.dart';
+import 'package:proyecto_1/domain/repositories/i_cliente_repository.dart';
 
 class ClienteRepository implements IClienteRepository {
-  final IClienteDataSource _userDatatasource;
-  ClienteRepository(this._userDatatasource);
+  final IClienteDataSource _clienteDatatasource;
+  ClienteRepository(this._clienteDatatasource);
 
   @override
-  Future<List<Cliente>> getClientes() async => await _userDatatasource.getClientes();
+  Future<List<Cliente>> getClientes() async =>
+      await _clienteDatatasource.getClientes();
 
   @override
   Future<bool> addCliente(Cliente rep) async =>
-      await _userDatatasource.addCliente(rep);
+      await _clienteDatatasource.addCliente(rep);
   @override
   Future<bool> updateCliente(Cliente rep) async =>
-      await _userDatatasource.updateCliente(rep);
+      await _clienteDatatasource.updateCliente(rep);
   @override
   Future<bool> deleteCliente(int id) async =>
-      await _userDatatasource.deleteCliente(id);
+      await _clienteDatatasource.deleteCliente(id);
 }

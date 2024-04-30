@@ -1,21 +1,18 @@
-import 'package:proyecto_1/domain/models/Clientes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:proyecto_1/domain/models/Clientes.dart';
 import 'package:proyecto_1/ui/controllers/Client_controller.dart';
-
 
 class NewclientePage extends StatefulWidget {
   const NewclientePage({Key? key}) : super(key: key);
 
   @override
-  _NewUserPageState createState() => _NewUserPageState();
+  _NewClientePageState createState() => _NewClientePageState();
 }
 
-class _NewUserPageState extends State<NewclientePage> {
+class _NewClientePageState extends State<NewclientePage> {
   final controllerId = TextEditingController();
   final controllerNombre = TextEditingController();
-  final controllerContrasena = TextEditingController();
-  final controllerCorreo = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,80 +20,77 @@ class _NewUserPageState extends State<NewclientePage> {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text('Nuevo usuario de soporte',style: TextStyle(color: Colors.white)),
+        title: const Text(
+          'Nuevo Cliente',
+          style: TextStyle(
+            color: Colors.white, // Título en blanco
+          ),
+        ),
+        leading:
+            const Icon(Icons.person_add, color: Colors.white), // Icono blanco
         backgroundColor: Colors.blueAccent,
       ),
       body: Center(
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.75,
+            padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(10.0),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16.0), // Bordes circulares
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
+                  color: Colors.grey.withOpacity(0.5), // Sombra suave
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: const Offset(0, 3), // Cambia la posición de la sombra
+                  offset: const Offset(0, 3), // Posición de la sombra
                 ),
               ],
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 20,
+            child: ListView(
+              shrinkWrap: true, // Para ajustar el tamaño del contenido
+              children: [
+                TextField(
+                  controller: controllerId,
+                  decoration: InputDecoration(
+                    labelText: 'ID Cliente',
+                    prefixIcon: const Icon(Icons.account_box), // Icono para ID
                   ),
-                  TextField(
-                      controller: controllerId,
-                      decoration: const InputDecoration(
-                        labelText: 'Id Usuario: ',
-                      )),
-                  const SizedBox(
-                    height: 20,
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: controllerNombre,
+                  decoration: InputDecoration(
+                    labelText: 'Nombre del Cliente',
+                    prefixIcon: const Icon(Icons.person), // Icono para nombre
                   ),
-                  TextField(
-                      controller: controllerNombre,
-                      decoration: const InputDecoration(
-                        labelText: 'Nombre: ',
-                      )),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Expanded(
-                            flex: 2,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blueAccent,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.zero,
-                                  ),
-                                ),
-                                onPressed: () async {
-                                  await clienteController.addcliente(Cliente(
-                                    id: int.parse(controllerId.text),
-                                    name: controllerNombre.text,
-                                  ));
-                                  Get.back();
-                                },
-                                child: const Text(
-                                  "Guardar cliente",
-                                  style: TextStyle(color: Colors.black),
-                                )))
-                      ],
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: SizedBox(
+                    width: 200, // Ancho reducido para el botón
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await clienteController.addcliente(
+                          Cliente(
+                            id: int.parse(controllerId.text),
+                            name: controllerNombre.text,
+                          ),
+                        );
+                        Get.back(); // Regresar a la página anterior
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.save), // Icono para guardar
+                          SizedBox(width: 8),
+                          Text("Guardar Cliente"),
+                        ],
+                      ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
