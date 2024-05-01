@@ -31,11 +31,11 @@ class ReportController extends GetxController {
   }
 
   addReport(Reporte rep) async {
-    Cliente? usuarioEncontrado = _clienteController.clients.firstWhereOrNull(
-      (user) => user.id == rep.idcliente,
-    );
+    //Cliente? usuarioEncontrado = _clienteController.clients.firstWhereOrNull(
+    //  (user) => user.id == rep.idcliente,
+    //);
 
-    if (usuarioEncontrado != null) {
+    if (await _clienteController.encontrarCliente(rep.idcliente)) {
       await reportUserCase.addReport(rep);
       getReports();
     }

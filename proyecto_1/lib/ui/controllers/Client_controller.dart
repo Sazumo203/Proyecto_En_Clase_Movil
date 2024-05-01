@@ -39,18 +39,8 @@ class ClientController extends GetxController {
     getClients();
   }
 
-  updateReport(Cliente clt) async {
-    //await userUseCase.updateReport(rep);
-    getClients();
+  Future<bool> encontrarCliente(int? id) async {
+    return _clients.any((c) => c.id == id);
   }
-
-  void deleteUser(int id) async {
-    //await userUseCase.deleteReport(id);
-    getClients();
-  }
-
-  //void simulateProcess() async {
-  //  await userUseCase.simulateProcess();
-  //}
   //a
 }
