@@ -21,7 +21,7 @@ class Reporte {
   String body;
   int grade;
   bool itsgraded;
-  TimeOfDay horainicio;
+  String horainicio;
   int duracion;
 
   String get gtitle => title;
@@ -37,7 +37,7 @@ class Reporte {
       body: json["body"] ?? "NA",
       grade: json["grade"] ?? "0",
       itsgraded: json["itsgraded"] ?? false,
-      horainicio: json["horainicio"] ?? "04:20:00",
+      horainicio: json["horainicio"] ?? "04:20",
       duracion: json["duracion"] ?? 30);
 
   Map<String, dynamic> toJson() => {

@@ -31,6 +31,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.put<IClienteDataSource>(ClienteDataSource());
+    Get.put<IClienteRepository>(ClienteRepository(Get.find()));
+    Get.put(ClienteUserCase(Get.find()));
     Get.put<IReportDataSource>(ReportDataSource());
     Get.put<IReportRepository>(ReportRepository(Get.find()));
     Get.put(ReportUserCase(Get.find()));
@@ -38,15 +41,12 @@ class MyApp extends StatelessWidget {
     Get.put<IUsuarioDataSource>(UsuarioDataSource());
     Get.put<IUsuarioRepository>(UsuarioRepository(Get.find()));
     Get.put(UsuarioUserCase(Get.find()));
-
-    Get.put<IClienteDataSource>(ClienteDataSource());
-    Get.put<IClienteRepository>(ClienteRepository(Get.find()));
-    Get.put(ClienteUserCase(Get.find()));
+    Get.put(ClientController());
     Get.put(UserController());
     Get.put(LoginController());
     Get.put(ReportController());
     Get.put(UserController());
-    Get.put(ClientController());
+
     return GetMaterialApp(
         title: 'Administrador de reportes',
         debugShowCheckedModeBanner: false,

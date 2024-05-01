@@ -50,13 +50,6 @@ class _NewUserPageState extends State<NewUserPage> {
             child: ListView(
               shrinkWrap: true, // Para ajustar el tamaño
               children: [
-                TextField(
-                  controller: controllerId,
-                  decoration: InputDecoration(
-                    labelText: 'ID Usuario',
-                    prefixIcon: const Icon(Icons.account_box), // Icono para ID
-                  ),
-                ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: controllerNombre,
@@ -90,7 +83,6 @@ class _NewUserPageState extends State<NewUserPage> {
                       onPressed: () async {
                         await userController.addUser(
                           Usuario(
-                            id: int.parse(controllerId.text),
                             name: controllerNombre.text,
                             correo: controllerCorreo.text,
                             password: controllerContrasena.text,

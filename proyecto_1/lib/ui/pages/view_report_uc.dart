@@ -48,6 +48,18 @@ class ReporteViewUc extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.fingerprint_sharp,
+                            color: Colors.blueAccent),
+                        const SizedBox(width: 10),
+                        Text(
+                          'ID del Reporte: ${reporte.id}',
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
                     // Información del creador
                     Row(
                       children: [
@@ -104,7 +116,7 @@ class ReporteViewUc extends StatelessWidget {
                         const Icon(Icons.access_time, color: Colors.blueAccent),
                         const SizedBox(width: 10),
                         Text(
-                          'Hora de inicio: ${reporte.horainicio.format(context)}',
+                          'Hora de inicio: ${reporte.horainicio}',
                           style: const TextStyle(fontSize: 18),
                         ),
                       ],
@@ -179,6 +191,7 @@ class ReporteViewUc extends StatelessWidget {
                 width: 200, // Control del ancho del botón
                 child: ElevatedButton(
                   onPressed: () {
+                    reporte.itsgraded = true;
                     reportController.updateReport(reporte);
                     Get.back();
                   },

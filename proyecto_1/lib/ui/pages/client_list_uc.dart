@@ -4,7 +4,6 @@ import 'package:proyecto_1/domain/models/Clientes.dart';
 import 'package:proyecto_1/ui/controllers/Client_controller.dart';
 import 'package:proyecto_1/ui/pages/add_client.dart';
 
-
 class ClientListUc extends StatefulWidget {
   const ClientListUc({super.key});
 
@@ -18,7 +17,10 @@ class _ClientListUc extends State<ClientListUc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Clientes",style: TextStyle(color: Colors.white)),backgroundColor: Colors.blueAccent, iconTheme: const IconThemeData(color: Colors.white)),
+      appBar: AppBar(
+          title: const Text("Clientes", style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.blueAccent,
+          iconTheme: const IconThemeData(color: Colors.white)),
       body: Center(child: _getXlistView()),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -39,8 +41,8 @@ class _ClientListUc extends State<ClientListUc> {
           Cliente cliente = clientController.clients[index];
           return Card(
             child: ListTile(
-              title: Text(cliente.gid.toString()),
-              subtitle: Text(cliente.gname),
+              subtitle: Text("ID: ${cliente.gid}"),
+              title: Text(cliente.gname),
               onTap: () {
                 //Get.to();
               },

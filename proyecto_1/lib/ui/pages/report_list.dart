@@ -7,12 +7,25 @@ import 'package:proyecto_1/ui/pages/add_report.dart';
 import 'package:proyecto_1/ui/pages/login.dart';
 import 'package:proyecto_1/ui/pages/view_report.dart';
 
-
 class Reportlist extends StatefulWidget {
   const Reportlist({super.key});
 
   @override
   State<Reportlist> createState() => _Reportlist();
+}
+
+Widget _buildStarRating(int grade) {
+  if (grade == 0) {
+    return const Text("No calificado"); // Texto si no está calificado
+  }
+  return Row(
+    children: List.generate(5, (index) {
+      return Icon(
+        index < grade ? Icons.star : Icons.star_border, // Estrella o borde
+        color: Colors.yellow,
+      );
+    }),
+  );
 }
 
 class _Reportlist extends State<Reportlist> {
@@ -25,7 +38,8 @@ class _Reportlist extends State<Reportlist> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: Obx(
-          () => Text("Bienvenido, ${loginController.nombreusuario}",style: const TextStyle(color: Colors.white)),
+          () => Text("Bienvenido, ${loginController.nombreusuario}",
+              style: const TextStyle(color: Colors.white)),
         ),
         backgroundColor: Colors.blueAccent,
         actions: [
@@ -53,11 +67,26 @@ class _Reportlist extends State<Reportlist> {
       () => ListView.builder(
         itemCount: reportController.reports.length,
         itemBuilder: (context, index) {
-          Reporte reporte = reportController.reports[index];
+          final reporte = reportController.reports[index];
           return Card(
             child: ListTile(
-              title: Text(reporte.gtitle),
-              subtitle: Text(reporte.body),
+              leading: Text(
+                reporte.horainicio, // Hora del reporte
+                style: const TextStyle(
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              title: Text(reporte.title),
+              subtitle: Row(
+                children: [
+                  Expanded(
+                      child: Text(
+                          "Encargado: ${reporte.creatorName}")), // Descripción del reporte
+                  _buildStarRating(
+                      reporte.grade), // Calificación como estrellas
+                ],
+              ),
               onTap: () {
                 Get.to(ReporteView(reporte: reporte));
               },

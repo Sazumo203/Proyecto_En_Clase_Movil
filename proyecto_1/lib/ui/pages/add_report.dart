@@ -60,11 +60,6 @@ class _NewReportPageState extends State<NewReportPage> {
             child: ListView(
               shrinkWrap: true, // Para ajustar el tamaño
               children: [
-                NumeroEnteroInput(
-                  label: "ID del Reporte",
-                  controller: controllerId,
-                  onTextChanged: (text) {},
-                ),
                 const SizedBox(height: 16),
                 NumeroEnteroInput(
                   label: "ID del Cliente",
@@ -113,9 +108,10 @@ class _NewReportPageState extends State<NewReportPage> {
                     width: 200, // Ancho reducido del botón
                     child: ElevatedButton(
                       onPressed: () async {
+                        String formattedTime =
+                            '${_selectedTime.hourOfPeriod}:${_selectedTime.minute.toString().padLeft(2, '0')} ${_selectedTime.period == DayPeriod.am ? 'AM' : 'PM'}';
                         await reportController.addReport(
                           Reporte(
-                            id: int.parse(controllerId.text),
                             idcliente: int.parse(controllerIdCliente.text),
                             creatorName: loginController.nombreusuario,
                             creactorId: loginController.idusuario,
@@ -123,7 +119,7 @@ class _NewReportPageState extends State<NewReportPage> {
                             body: controllerBody.text,
                             grade: 0,
                             itsgraded: false,
-                            horainicio: _selectedTime,
+                            horainicio: formattedTime,
                             duracion: int.parse(controllerDuracion.text),
                           ),
                         );

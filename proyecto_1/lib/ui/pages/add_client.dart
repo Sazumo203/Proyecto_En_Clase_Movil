@@ -50,13 +50,6 @@ class _NewClientePageState extends State<NewclientePage> {
             child: ListView(
               shrinkWrap: true, // Para ajustar el tamaño del contenido
               children: [
-                TextField(
-                  controller: controllerId,
-                  decoration: InputDecoration(
-                    labelText: 'ID Cliente',
-                    prefixIcon: const Icon(Icons.account_box), // Icono para ID
-                  ),
-                ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: controllerNombre,
@@ -73,7 +66,6 @@ class _NewClientePageState extends State<NewclientePage> {
                       onPressed: () async {
                         await clienteController.addcliente(
                           Cliente(
-                            id: int.parse(controllerId.text),
                             name: controllerNombre.text,
                           ),
                         );

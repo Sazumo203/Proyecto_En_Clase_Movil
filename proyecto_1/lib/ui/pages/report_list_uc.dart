@@ -85,7 +85,7 @@ class _ReportListUc extends State<ReportListUc> {
             return Card(
               child: ListTile(
                 leading: Text(
-                  reporte.horainicio.format(context), // Hora del reporte
+                  reporte.horainicio, // Hora del reporte
                   style: const TextStyle(
                     color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,

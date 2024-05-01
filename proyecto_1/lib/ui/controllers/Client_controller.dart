@@ -2,38 +2,40 @@ import 'dart:html';
 
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Clientes.dart';
+import 'package:proyecto_1/domain/use_case/cliente_usercase.dart';
 
 class ClientController extends GetxController {
   final RxList<Cliente> _clients = <Cliente>[].obs;
-  //final UserUseCase userUseCase = Get.find()  sda;
+  final ClienteUserCase clienteUseCase = Get.find();
 
   List<Cliente> get clients => _clients;
 
   @override
   void onInit() {
-    initClients();
+    getClients();
     //GET
     super.onInit();
   }
 
-  initClients() async {
-    _clients.value = [
-      Cliente(
-          id: 12,
-          name: "Pedro Perez"),
-      Cliente(
-          id: 34,
-          name: "Juan Jimenez")
-    ];
-  }
+  // initClients() async {
+  //   _clients.value = [
+  //     Cliente(
+  //         id: 12,
+  //         name: "Pedro Perez"),
+  //     Cliente(
+  //         id: 34,
+  //         name: "Juan Jimenez")
+  //   ];
+  // }
 
   getClients() async {
-    //_reports.value = await userUseCase.getUsers();
+    _clients.value = await clienteUseCase.getClientes();
+    _clients.refresh();
   }
 
   addcliente(Cliente clt) async {
-    //await userUseCase.addReport(rep);
-    _clients.value = [..._clients.value, clt];
+    await clienteUseCase.addCliente(clt);
+
     getClients();
   }
 

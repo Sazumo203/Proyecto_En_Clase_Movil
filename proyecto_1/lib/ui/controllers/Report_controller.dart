@@ -1,8 +1,10 @@
 import 'dart:html';
 
 import 'package:get/get.dart';
+import 'package:proyecto_1/domain/models/Clientes.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:proyecto_1/domain/use_case/report_usercase.dart';
+import 'package:proyecto_1/ui/controllers/Client_controller.dart';
 
 class ReportController extends GetxController {
   final RxList<Reporte> _reports = <Reporte>[].obs;
@@ -10,6 +12,7 @@ class ReportController extends GetxController {
   RxInt _calificacion = 0.obs;
   List<Reporte> get reports => _reports;
   final ReportUserCase reportUserCase = Get.find();
+  final ClientController _clienteController = Get.find<ClientController>();
   int get calificacion => _calificacion.value;
   @override
   void onInit() {
@@ -28,17 +31,18 @@ class ReportController extends GetxController {
   }
 
   addReport(Reporte rep) async {
-    await reportUserCase.addReport(rep);
-    getReports();
+    Cliente? usuarioEncontrado = _clienteController.clients.firstWhereOrNull(
+      (user) => user.id == rep.idcliente,
+    );
+
+    if (usuarioEncontrado != null) {
+      await reportUserCase.addReport(rep);
+      getReports();
+    }
   }
 
   updateReport(Reporte rep) async {
     await reportUserCase.updateReport(rep);
-    getReports();
-  }
-
-  void deleteReport(int id) async {
-    await reportUserCase.deleteReport(id);
     getReports();
   }
 }
