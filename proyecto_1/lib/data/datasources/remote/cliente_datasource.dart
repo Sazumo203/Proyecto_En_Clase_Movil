@@ -1,7 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:loggy/loggy.dart';
 import 'package:proyecto_1/data/datasources/remote/i_cliente_datasource.dart';

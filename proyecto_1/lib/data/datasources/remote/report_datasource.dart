@@ -1,117 +1,147 @@
 import 'dart:convert';
-import 'dart:html';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
 import 'package:loggy/loggy.dart';
 import 'package:proyecto_1/data/datasources/remote/i_report_datasource.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
+import 'package:hive/hive.dart';
 
 class ReportDataSource implements IReportDataSource {
   final http.Client httpClient;
   final String apiKey = 'i8sNE4';
+  final Box<ReporteHive> reportesBox;
 
   ReportDataSource({http.Client? client})
-      : httpClient = client ?? http.Client();
-
-  List<Reporte> repors = [
-    Reporte(
-        id: 1,
-        idcliente: 1,
-        creatorName: "Rafael Martinez",
-        creactorId: 222,
-        title: "Reporte de la mañana",
-        body: "Juanchito la silla y la parte",
-        grade: 4,
-        itsgraded: true,
-        horainicio: "8:30",
-        duracion: 25),
-    Reporte(
-        id: 2,
-        idcliente: 2,
-        creatorName: "Samuel Zuleta",
-        creactorId: 111,
-        title: "Reporte de la tarde",
-        body: "Camilo se da trompá con Juanchito por estúpido",
-        grade: 0,
-        itsgraded: false,
-        horainicio: "17:25",
-        duracion: 45)
-  ];
+      : httpClient = client ?? http.Client(),
+        reportesBox = Hive.box<ReporteHive>('reportes');
 
   @override
   Future<List<Reporte>> getReports() async {
-    List<Reporte> users = [];
-    var request = Uri.parse("https://retoolapi.dev/$apiKey/data")
-        .resolveUri(Uri(queryParameters: {
-      "format": 'json',
-    }));
-
-    var response = await httpClient.get(request);
-
-    if (response.statusCode == 200) {
-      //logInfo(response.body);
-      final data = jsonDecode(response.body);
-
-      users = List<Reporte>.from(data.skip(1).map((x) => Reporte.fromJson(x)));
-      //users.removeAt(1);
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      // Return reports from local storage
+      return reportesBox.values.map((e) => e.toReporte()).toList();
     } else {
-      logError("Got error code ${response.statusCode}");
-      return Future.error('Error code ${response.statusCode}');
+      // Fetch reports from the server
+      var request = Uri.parse("https://retoolapi.dev/$apiKey/data")
+          .resolveUri(Uri(queryParameters: {"format": 'json'}));
+      var response = await httpClient.get(request);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        List<Reporte> users =
+            List<Reporte>.from(data.map((x) => Reporte.fromJson(x)));
+
+        // Save reports to local storage
+        for (var report in users) {
+          reportesBox.put(report.id, ReporteHive.fromReporte(report));
+        }
+
+        return users;
+      } else {
+        logError("Got error code ${response.statusCode}");
+        return Future.error('Error code ${response.statusCode}');
+      }
     }
-    return Future.value(users);
-    //return Future.value(repors);
   }
 
   @override
   Future<bool> addReport(Reporte rep) async {
-    logInfo("Web service, Adding user");
-
-    final response = await httpClient.post(
-      Uri.parse("https://retoolapi.dev/$apiKey/data"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(rep.toJson()),
-    );
-
-    if (response.statusCode == 201) {
-      //logInfo(response.body);
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    print(connectivityResult);
+    if (connectivityResult == ConnectivityResult.none) {
+      // Save report locally
+      print("jaja");
+      await reportesBox.add(ReporteHive.fromReporte(rep));
       return Future.value(true);
     } else {
-      logError("Got error code ${response.statusCode}");
-      return Future.value(false);
+      print("Buena");
+      // Add report to the server
+      final response = await httpClient.post(
+        Uri.parse("https://retoolapi.dev/$apiKey/data"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(rep.toJson()),
+      );
+
+      if (response.statusCode == 201) {
+        // Save report to local storage
+        rep.id = jsonDecode(response.body)["id"];
+        await reportesBox.put(rep.id, ReporteHive.fromReporte(rep));
+        return Future.value(true);
+      } else {
+        logError("Got error code ${response.statusCode}");
+        return Future.value(false);
+      }
     }
-    //repors = [...repors, rep];
-    //return Future.value(true);
   }
 
   @override
   Future<bool> updateReport(Reporte rep) async {
-    final response = await httpClient.put(
-      Uri.parse("https://retoolapi.dev/$apiKey/data/${rep.id}"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(rep.toJson()),
-    );
-
-    if (response.statusCode == 200) {
-      //logInfo(response.body);
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      // Update report locally
+      await reportesBox.put(rep.id, ReporteHive.fromReporte(rep));
       return Future.value(true);
     } else {
-      logError("Got error code ${response.statusCode}");
-      return Future.value(false);
-    }
-    //Reporte reporte = repors.firstWhere((repo) => repo.id == rep.id);
-    //reporte.grade = rep.grade;
-    //reporte.itsgraded = true;
+      // Update report on the server
+      final response = await httpClient.put(
+        Uri.parse("https://retoolapi.dev/$apiKey/data/${rep.id}"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(rep.toJson()),
+      );
 
-    //return Future.value(true);
+      if (response.statusCode == 200) {
+        // Update report in local storage
+        await reportesBox.put(rep.id, ReporteHive.fromReporte(rep));
+        return Future.value(true);
+      } else {
+        logError("Got error code ${response.statusCode}");
+        return Future.value(false);
+      }
+    }
   }
 
   @override
   Future<bool> deleteReport(int id) async {
-    return Future.value(false);
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      // Delete report locally
+      await reportesBox.delete(id);
+      return Future.value(true);
+    } else {
+      // Delete report from the server
+      final response = await httpClient.delete(
+        Uri.parse("https://retoolapi.dev/$apiKey/data/$id"),
+      );
+
+      if (response.statusCode == 200) {
+        // Delete report from local storage
+        await reportesBox.delete(id);
+        return Future.value(true);
+      } else {
+        logError("Got error code ${response.statusCode}");
+        return Future.value(false);
+      }
+    }
+  }
+
+  Future<void> syncOfflineData() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      for (var reportHive in reportesBox.values) {
+        Reporte report = reportHive.toReporte();
+        if (report.id == null) {
+          // Add report to the server
+          await addReport(report);
+        } else {
+          // Update report on the server
+          await updateReport(report);
+        }
+      }
+    }
   }
 }

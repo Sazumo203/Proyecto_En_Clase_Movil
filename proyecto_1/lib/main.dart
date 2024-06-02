@@ -1,8 +1,12 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:proyecto_1/data/datasources/remote/i_report_datasource.dart';
 import 'package:proyecto_1/data/datasources/remote/report_datasource.dart';
 import 'package:proyecto_1/data/repositories/report_repository.dart';
+import 'package:proyecto_1/domain/models/Reportes.dart';
 import 'package:proyecto_1/domain/repositories/I_report_repository.dart';
 import 'package:proyecto_1/domain/use_case/report_usercase.dart';
 import 'package:proyecto_1/data/datasources/remote/i_usuario_datasource.dart';
@@ -21,12 +25,34 @@ import 'package:proyecto_1/ui/controllers/User_controller.dart';
 import 'package:proyecto_1/ui/controllers/login_controller.dart';
 import 'package:proyecto_1/ui/pages/login.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Necesario para inicializar Hive
+  await Hive.initFlutter();
+  Hive.registerAdapter(ReporteHiveAdapter());
+  await Hive.openBox<ReporteHive>('reportes');
+
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final ReportDataSource reportDataSource = ReportDataSource();
+
+  @override
+  void initState() {
+    super.initState();
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      print("CAMBIO LA CONEXION");
+      if (result != ConnectivityResult.none) {
+        print("Estas conectado");
+        reportDataSource.syncOfflineData();
+      }
+    });
+  }
 
   // This widget is the root of your application.
   @override
