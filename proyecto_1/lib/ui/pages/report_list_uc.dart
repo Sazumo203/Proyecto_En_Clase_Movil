@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:proyecto_1/domain/models/Reportes.dart';
+import 'package:proyecto_1/ui/controllers/Client_controller.dart';
 import 'package:proyecto_1/ui/controllers/Report_controller.dart';
+import 'package:proyecto_1/ui/controllers/User_controller.dart';
 import 'package:proyecto_1/ui/controllers/login_controller.dart';
 import 'package:proyecto_1/ui/pages/client_list_uc.dart';
 import 'package:proyecto_1/ui/pages/login.dart';
@@ -43,6 +45,17 @@ class _ReportListUc extends State<ReportListUc> {
         backgroundColor: Colors.blueAccent,
         actions: [
           TextButton(
+            onPressed: () => _showFloatingPanel(context),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.filter_alt, color: Colors.white),
+                SizedBox(width: 5),
+                Text("Filtros", style: TextStyle(color: Colors.white)),
+              ],
+            ),
+          ),
+          TextButton(
             onPressed: () {
               Get.to(const UsersListUc());
             },
@@ -79,9 +92,9 @@ class _ReportListUc extends State<ReportListUc> {
       ),
       body: Obx(
         () => ListView.builder(
-          itemCount: reportController.reports.length,
+          itemCount: reportController.reportsF.length,
           itemBuilder: (context, index) {
-            final reporte = reportController.reports[index];
+            final reporte = reportController.reportsF[index];
             return Card(
               child: ListTile(
                 leading: Text(
@@ -115,4 +128,93 @@ class _ReportListUc extends State<ReportListUc> {
       ),
     );
   }
+}
+
+void _showFloatingPanel(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return _buildFloatingPanel();
+    },
+    isScrollControlled: true,
+  );
+}
+
+Widget _buildFloatingPanel() {
+  final reportController = Get.find<ReportController>();
+  UserController userController = Get.find();
+  ClientController clientController = Get.find();
+  return Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const Text(
+          'Filtros',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 16),
+        const Text(
+          'por usuario(US)',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 16),
+        DropdownButtonFormField(
+          items: userController.users.map((e) {
+            return DropdownMenuItem(
+              value: e.gid,
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  e.gname,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (int? value) {
+            reportController.setUserFilter(value!);
+            reportController.updateReportsFiltered();
+          },
+          isDense: true,
+          isExpanded: true,
+        ),
+        const SizedBox(height: 16),
+        const Text(
+          'por cliente',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 16),
+        DropdownButtonFormField(
+          items: clientController.clients.map((e) {
+            return DropdownMenuItem(
+              value: e.gid,
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  e.gname,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (int? value) {
+              reportController.setClientFilter(value!);
+              reportController.updateReportsFiltered();
+            },
+          isDense: true,
+          isExpanded: true,
+        ),
+        const SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: () {
+            reportController.setClientFilter(0);
+            reportController.setUserFilter(0);
+            reportController.updateReportsFiltered();
+          },
+          child: const Text('Borrar filtros'),
+        ),
+      ],
+    ),
+  );
 }
