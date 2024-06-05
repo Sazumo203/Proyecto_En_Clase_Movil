@@ -2,8 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:proyecto_1/data/repositories/cliente_repository.dart';
 import 'package:proyecto_1/domain/models/Clientes.dart';
-
-import '../use_cases/Usuario_controller_unit_test.mocks.dart';
+import '../mocks/cliente_controller_unit_test.mocks.dart';
 
 void main() {
   late MockIClienteDataSource mockIClientDataSource;
