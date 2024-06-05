@@ -29,8 +29,9 @@ class ReportDataSource implements IReportDataSource {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
+
         List<Reporte> users =
-            List<Reporte>.from(data.map((x) => Reporte.fromJson(x)));
+            List<Reporte>.from(data.skip(1).map((x) => Reporte.fromJson(x)));
 
         // Save reports to local storage
         for (var report in users) {
