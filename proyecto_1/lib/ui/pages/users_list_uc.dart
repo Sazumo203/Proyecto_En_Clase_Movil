@@ -25,6 +25,7 @@ class _UsersListUc extends State<UsersListUc> {
           iconTheme: const IconThemeData(color: Colors.white)),
       body: Center(child: _getXlistView()),
       floatingActionButton: FloatingActionButton(
+        key: const Key('Buttonagregarusuario'),
         onPressed: () async {
           Get.to(
             () => const NewUserPage(),

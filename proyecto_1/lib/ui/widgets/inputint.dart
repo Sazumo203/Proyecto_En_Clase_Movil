@@ -3,14 +3,13 @@ import 'package:flutter/services.dart';
 
 class NumeroEnteroInput extends StatelessWidget {
   final String label;
-  final TextEditingController
-      controller; // El controlador para el campo de texto
+  final TextEditingController controller; // El controlador para el campo de texto
   final Function(String) onTextChanged; // Callback para el texto cambiado
 
   NumeroEnteroInput({
     required this.label,
     required this.controller,
-    required this.onTextChanged,
+    required this.onTextChanged, required Key key,
   });
 
   @override

@@ -52,10 +52,11 @@ class _NewClientePageState extends State<NewclientePage> {
               children: [
                 const SizedBox(height: 16),
                 TextField(
+                  key: const Key('nombrecliente'),
                   controller: controllerNombre,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Nombre del Cliente',
-                    prefixIcon: const Icon(Icons.person), // Icono para nombre
+                    prefixIcon: Icon(Icons.person), // Icono para nombre
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -63,6 +64,7 @@ class _NewClientePageState extends State<NewclientePage> {
                   child: SizedBox(
                     width: 200, // Ancho reducido para el botón
                     child: ElevatedButton(
+                      key: const Key('Buttonconfirmaragregarcliente'),
                       onPressed: () async {
                         await clienteController.addcliente(
                           Cliente(
@@ -71,9 +73,9 @@ class _NewClientePageState extends State<NewclientePage> {
                         );
                         Get.back(); // Regresar a la página anterior
                       },
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Icon(Icons.save), // Icono para guardar
                           SizedBox(width: 8),
                           Text("Guardar Cliente"),

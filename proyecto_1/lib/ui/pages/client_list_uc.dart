@@ -23,6 +23,7 @@ class _ClientListUc extends State<ClientListUc> {
           iconTheme: const IconThemeData(color: Colors.white)),
       body: Center(child: _getXlistView()),
       floatingActionButton: FloatingActionButton(
+        key: const Key('Buttonagregarcliente'),
         onPressed: () async {
           Get.to(
             () => const NewclientePage(),

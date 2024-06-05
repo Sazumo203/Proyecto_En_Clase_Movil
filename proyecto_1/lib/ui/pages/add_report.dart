@@ -22,6 +22,8 @@ class _NewReportPageState extends State<NewReportPage> {
   final timeController = TextEditingController();
   TimeOfDay _selectedTime = const TimeOfDay(hour: 4, minute: 20);
 
+
+
   final controllerDuracion = TextEditingController();
 
   @override
@@ -62,33 +64,37 @@ class _NewReportPageState extends State<NewReportPage> {
               children: [
                 const SizedBox(height: 16),
                 NumeroEnteroInput(
+                  key: const Key('IDclientereport'),
                   label: "ID del Cliente",
                   controller: controllerIdCliente,
                   onTextChanged: (text) {},
                 ),
                 const SizedBox(height: 16),
                 TextField(
+                  key: const Key('titlereport'),
                   controller: controllerTitle,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Título del Reporte',
-                    prefixIcon: const Icon(Icons.title), // Icono para título
+                    prefixIcon: Icon(Icons.title), // Icono para título
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
+                  key: const Key('descriptionreport'),
                   controller: controllerBody,
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
                   maxLines: 8,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Descripción del Reporte',
                     prefixIcon:
-                        const Icon(Icons.description), // Icono para descripción
+                        Icon(Icons.description), // Icono para descripción
                     border: OutlineInputBorder(), // Para resaltar el campo
                   ),
                 ),
                 const SizedBox(height: 16),
                 HoraSelector(
+                  key: const Key('hourselector'),
                   label: "Hora de Inicio",
                   onTimeSelected: (selectedTime) {
                     setState(() {
@@ -98,6 +104,7 @@ class _NewReportPageState extends State<NewReportPage> {
                 ),
                 const SizedBox(height: 16),
                 NumeroEnteroInput(
+                  key: const Key('duraciónreport'),
                   label: "Duración (en minutos)",
                   controller: controllerDuracion,
                   onTextChanged: (text) {},
@@ -107,6 +114,7 @@ class _NewReportPageState extends State<NewReportPage> {
                   child: SizedBox(
                     width: 200, // Ancho reducido del botón
                     child: ElevatedButton(
+                      key: const Key('Botonguardarreporte'),
                       onPressed: () async {
                         String formattedTime =
                             '${_selectedTime.hourOfPeriod}:${_selectedTime.minute.toString().padLeft(2, '0')} ${_selectedTime.period == DayPeriod.am ? 'AM' : 'PM'}';
@@ -125,9 +133,9 @@ class _NewReportPageState extends State<NewReportPage> {
                         );
                         Get.back(); // Regresar a la página anterior
                       },
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Icon(Icons.save), // Icono para guardar
                           SizedBox(width: 8),
                           Text("Guardar Reporte"),

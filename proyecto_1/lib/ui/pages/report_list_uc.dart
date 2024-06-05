@@ -56,6 +56,7 @@ class _ReportListUc extends State<ReportListUc> {
             ),
           ),
           TextButton(
+            key: const Key('Buttonusuario'),
             onPressed: () {
               Get.to(const UsersListUc());
             },
@@ -69,6 +70,7 @@ class _ReportListUc extends State<ReportListUc> {
             ),
           ),
           TextButton(
+            key: const Key('Buttoncliente'),
             onPressed: () {
               Get.to(const ClientListUc());
             },

@@ -52,27 +52,30 @@ class _NewUserPageState extends State<NewUserPage> {
               children: [
                 const SizedBox(height: 16),
                 TextField(
+                  key: const Key('nombreusuario'),
                   controller: controllerNombre,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Nombre',
-                    prefixIcon: const Icon(Icons.person), // Icono para nombre
+                    prefixIcon: Icon(Icons.person), // Icono para nombre
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
+                  key: const Key('correousuario'),
                   controller: controllerCorreo,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Correo Electrónico',
-                    prefixIcon: const Icon(Icons.email), // Icono para correo
+                    prefixIcon: Icon(Icons.email), // Icono para correo
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
+                  key: const Key('contrasenausuario'),
                   controller: controllerContrasena,
                   obscureText: true, // Ocultar contraseña
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Contraseña',
-                    prefixIcon: const Icon(Icons.lock), // Icono para contraseña
+                    prefixIcon: Icon(Icons.lock), // Icono para contraseña
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -80,6 +83,7 @@ class _NewUserPageState extends State<NewUserPage> {
                   child: SizedBox(
                     width: 200, // Ancho reducido del botón
                     child: ElevatedButton(
+                      key: const Key('Buttonconfirmaragregarusuario'),
                       onPressed: () async {
                         await userController.addUser(
                           Usuario(
@@ -90,9 +94,9 @@ class _NewUserPageState extends State<NewUserPage> {
                         );
                         Get.back(); // Regresar a la página anterior
                       },
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Icon(Icons.save), // Icono para guardar
                           SizedBox(width: 8),
                           Text("Guardar Usuario"),

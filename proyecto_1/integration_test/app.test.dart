@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -56,7 +57,7 @@ Future<void> main() async {
   setUpAll(() async {});
 
   tearDownAll(() async {
-    await Hive.close();
+    //await Hive.close();
   });
 
   testWidgets("login --> login éxitoso", (WidgetTester tester) async {
@@ -72,5 +73,125 @@ Future<void> main() async {
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(find.text('Ingresa correo'), findsNothing);
+  });
+
+  testWidgets("login --> menu usuarios --> crear usuario",
+      (WidgetTester tester) async {
+    Widget widget = await createHomeScreen();
+    await tester.pumpWidget(widget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    expect(find.text('Filtros'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('Buttonusuario')));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    expect(find.text('Trabajadores'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('Buttonagregarusuario')));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    await tester.enterText(
+        find.byKey(const Key('nombreusuario')), 'rafael martinez');
+
+    await tester.enterText(find.byKey(const Key('correousuario')), 'r@a.com');
+
+    await tester.enterText(
+        find.byKey(const Key('contrasenausuario')), '123456789');
+
+    await tester.tap(find.byKey(const Key('Buttonconfirmaragregarusuario')));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    expect(find.text('Trabajadores'), findsOne);
+  });
+
+  testWidgets("login --> menu clientes --> crear cliente",
+      (WidgetTester tester) async {
+    Widget widget = await createHomeScreen();
+    await tester.pumpWidget(widget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), 'a@a.com');
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), '123456');
+
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    expect(find.text('Filtros'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('Buttoncliente')));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    expect(find.text('Clientes'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('Buttonagregarcliente')));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    await tester.enterText(
+        find.byKey(const Key('nombrecliente')), 'juan perez');
+
+    await tester.tap(find.byKey(const Key('Buttonconfirmaragregarcliente')));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    expect(find.text('Clientes'), findsOne);
+  });
+
+  testWidgets("login --> crear reporte", (WidgetTester tester) async {
+
+
+    Widget widget = await createHomeScreen();
+    await tester.pumpWidget(widget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), "s@a.com");
+
+    await tester.pumpAndSettle(const Duration(seconds: 3));
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), "54321");
+    
+    await tester.pumpAndSettle(const Duration(seconds: 3));
+
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    expect(find.byKey(const Key('Buttonreporte')), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('Buttonreporte')));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    expect(find.text('Nuevo Reporte'), findsOneWidget);
+  });
+
+    testWidgets("login --> calificar reporte", (WidgetTester tester) async {
+
+    Widget widget = await createHomeScreen();
+    await tester.pumpWidget(widget);
+
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginEmail')), "a@a.com");
+
+    await tester.pumpAndSettle(const Duration(seconds: 3));
+    await tester.enterText(
+        find.byKey(const Key('TextFormFieldLoginPassword')), "123456");
+    
+    await tester.pumpAndSettle(const Duration(seconds: 3));
+
+    await tester.tap(find.byKey(const Key('ButtonLoginSubmit')));
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    expect(find.text('Reportes'), findsOneWidget);
+
+    await tester.tap(find.text('si'));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    expect(find.text('Detalle del Reporte'), findsOneWidget);
   });
 }

@@ -7,7 +7,7 @@ class HoraSelector extends StatefulWidget {
 
   HoraSelector({
     required this.label,
-    required this.onTimeSelected,
+    required this.onTimeSelected, required Key key,
   });
 
   @override

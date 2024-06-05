@@ -54,6 +54,7 @@ class _Reportlist extends State<Reportlist> {
       ),
       body: Center(child: _getXlistView()), // Asumiendo que esta función existe
       floatingActionButton: FloatingActionButton(
+        key: const Key('Buttonreporte'),
         onPressed: () {
           Get.to(() => const NewReportPage());
         },
